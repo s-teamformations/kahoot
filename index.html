@@ -77,34 +77,24 @@
   z-index: 1;
 }
 
-
-@media (max-width: 640px) {
-  .quiz-header {
-    flex-direction: column;      /* titre + badge l’un en dessous de l’autre */
-    align-items: center;         /* centre horizontalement le bloc */
-    text-align: center;          /* centre le texte à l’intérieur */
-  }
-
   .quiz-header-main {
     align-items: center;         /* centre le contenu du bloc titre */
   }
 }
 
-
 .quiz-header {
   display: flex;
-  justify-content: space-between;  /* pousse le badge à droite */
-  align-items: flex-start;         /* aligne tout en haut, pas au milieu */
-  gap: 10px;
+  justify-content: center;   /* centre le bloc dans la carte */
   margin-bottom: 18px;
 }
 
 .quiz-header-main {
   display: flex;
   flex-direction: column;
+  align-items: center;       /* centre le contenu */
+  text-align: center;        /* texte centré */
   gap: 4px;
-  flex: 1;
-  min-width: 0;
+  max-width: 100%;
 }
 
 .quiz-title {
@@ -123,9 +113,11 @@
 .quiz-tags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;   /* les “pills” sport sont centrés aussi */
   gap: 6px;
   margin-top: 6px;
 }
+
 
 .chip {
   font-size: 0.7rem;
