@@ -391,11 +391,10 @@ function showEndScreen() {
   const percent = Math.round((score / total) * 100);
 
   if (playerName) {
-  endScore.textContent = `${playerName}, tu as obtenu ${score} / ${total} (${percent}%).`;
-} else {
-  endScore.textContent = `Tu as obtenu ${score} / ${total} (${percent}%).`;
-}
-
+    endScore.textContent = `${playerName}, tu as obtenu ${score} / ${total} (${percent}%).`;
+  } else {
+    endScore.textContent = `Tu as obtenu ${score} / ${total} (${percent}%).`;
+  }
 
   let msg = "";
   if (percent === 100) {
@@ -411,7 +410,33 @@ function showEndScreen() {
 
   endCorrect.textContent = `Bonnes réponses : ${score}`;
   endTotal.textContent = `Nombre total de questions : ${total}`;
+
+  // ✅ Envoi des résultats vers Google Sheets
+  sendResultsToSheet({
+    pseudo: playerName || "Anonyme",
+    score: score,
+    totalQuestions: total,
+    pourcentage: percent
+  });
 }
+
+function sendResultsToServer(data) {
+  fetch("https://TON-ENDPOINT.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+}
+
+sendResultsToServer({
+  pseudo: playerName,
+  score: score,
+  totalQuestions: questions.length,
+  // éventuellement: answers: tableauDesRéponses
+});
+
 
 // Événements
 
@@ -434,4 +459,33 @@ nextBtn.addEventListener("click", goToNext);
 
 // Quand on rejoue, on garde le même pseudo
 restartBtn.addEventListener("click", startQuiz);
+
+// =============================
+// ENVOI DES RÉSULTATS VERS GOOGLE SHEETS
+// =============================
+
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeOF-ZcFFERkyAuNQ-L3YbJqfmcXMOakiD6HXkIaqKiemDFAOeBsIMuhl4E44O9laJ/exec"; // TODO: remplacer
+
+function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
+  // On construit l'objet à envoyer
+  const payload = {
+    pseudo,
+    score,
+    totalQuestions,
+    pourcentage
+  };
+
+  // On tente d'envoyer les données, sans bloquer le quiz si ça échoue
+  fetch(SHEET_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8"
+    },
+    body: JSON.stringify(payload)
+  }).catch((err) => {
+    // Optionnel : log dans la console pour débogage
+    console.error("Erreur envoi résultats Sheets :", err);
+  });
+}
+
 
