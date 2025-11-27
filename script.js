@@ -420,25 +420,30 @@ function showEndScreen() {
   });
 }
 
-function sendResultsToServer(data) {
-  fetch("https://TON-ENDPOINT.com", {
+// =============================
+// ENVOI DES RÉSULTATS VERS GOOGLE SHEETS
+// =============================
+
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeOF-ZcFFERkyAuNQ-L3YbJqfmcXMOakiD6HXkIaqKiemDFAOeBsIMuhl4E44O9laJ/exec";
+
+function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
+  const payload = { pseudo, score, totalQuestions, pourcentage };
+
+  fetch(SHEET_ENDPOINT, {
     method: "POST",
+    mode: "no-cors", // important pour éviter les problèmes CORS
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "text/plain;charset=utf-8"
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(payload)
+  }).catch((err) => {
+    console.error("Erreur envoi résultats Sheets :", err);
   });
 }
 
-sendResultsToServer({
-  pseudo: playerName,
-  score: score,
-  totalQuestions: questions.length,
-  // éventuellement: answers: tableauDesRéponses
-});
-
-
-// Événements
+// =============================
+// ÉVÉNEMENTS
+// =============================
 
 // On vérifie le pseudo avant de lancer le quiz
 startBtn.addEventListener("click", () => {
@@ -459,33 +464,3 @@ nextBtn.addEventListener("click", goToNext);
 
 // Quand on rejoue, on garde le même pseudo
 restartBtn.addEventListener("click", startQuiz);
-
-// =============================
-// ENVOI DES RÉSULTATS VERS GOOGLE SHEETS
-// =============================
-
-const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeOF-ZcFFERkyAuNQ-L3YbJqfmcXMOakiD6HXkIaqKiemDFAOeBsIMuhl4E44O9laJ/exec"; // TODO: remplacer
-
-function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
-  // On construit l'objet à envoyer
-  const payload = {
-    pseudo,
-    score,
-    totalQuestions,
-    pourcentage
-  };
-
-  // On tente d'envoyer les données, sans bloquer le quiz si ça échoue
-  fetch(SHEET_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8"
-    },
-    body: JSON.stringify(payload)
-  }).catch((err) => {
-    // Optionnel : log dans la console pour débogage
-    console.error("Erreur envoi résultats Sheets :", err);
-  });
-}
-
-
