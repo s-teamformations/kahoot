@@ -78,11 +78,18 @@
 }
 
 
-    @media (min-width: 640px) {
-      .quiz-container {
-        padding: 28px 30px 30px;
-      }
-    }
+@media (max-width: 640px) {
+  .quiz-header {
+    flex-direction: column;      /* titre + badge l’un en dessous de l’autre */
+    align-items: center;         /* centre horizontalement le bloc */
+    text-align: center;          /* centre le texte à l’intérieur */
+  }
+
+  .quiz-header-main {
+    align-items: center;         /* centre le contenu du bloc titre */
+  }
+}
+
 
 .quiz-header {
   display: flex;
