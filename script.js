@@ -253,6 +253,7 @@ const endScreen = document.getElementById("end-screen");
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
 const restartBtn = document.getElementById("restart-btn");
+const validateBtn = document.getElementById("validate-btn");
 
 const infoQuestionCount = document.getElementById("info-question-count");
 const progressText = document.getElementById("progress-text");
@@ -276,7 +277,9 @@ const pseudoError = document.getElementById("pseudo-error");
 let playerName = "";
 let currentQuestionIndex = 0;
 let score = 0;
-let hasAnswered = false;
+let hasValidated = false;
+let selectedAnswerIndex = null;
+let userAnswers = []; // on stocke l'index choisi pour chaque question
 
 // Pré-affiche le nombre de questions sur l’écran de départ
 infoQuestionCount.textContent = `${questions.length} question(s)`;
@@ -284,8 +287,11 @@ infoQuestionCount.textContent = `${questions.length} question(s)`;
 function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
-  hasAnswered = false;
-  scoreText.textContent = score;
+  hasValidated = false;
+  selectedAnswerIndex = null;
+  userAnswers = [];
+
+  scoreText.textContent = "-";
 
   startScreen.classList.add("hidden");
   endScreen.classList.add("hidden");
@@ -296,8 +302,11 @@ function startQuiz() {
 }
 
 function loadQuestion() {
-  hasAnswered = false;
+  hasValidated = false;
+  selectedAnswerIndex = null;
   nextBtn.disabled = true;
+  validateBtn.disabled = false;
+
   feedback.textContent = "";
   feedback.className = "feedback";
 
@@ -319,7 +328,7 @@ function loadQuestion() {
     btn.setAttribute("data-prefix", prefixes[index] || "");
     btn.textContent = answer;
 
-    btn.addEventListener("click", () => handleAnswerClick(btn, index));
+    btn.addEventListener("click", () => selectAnswer(btn, index));
 
     answersContainer.appendChild(btn);
   });
@@ -334,34 +343,44 @@ function loadQuestion() {
   updateProgress();
 }
 
-function handleAnswerClick(button, index) {
-  if (hasAnswered) return;
-  hasAnswered = true;
+function selectAnswer(button, index) {
+  if (hasValidated) return; // une fois validé, on ne change plus
 
-  const q = questions[currentQuestionIndex];
+  selectedAnswerIndex = index;
 
-  // Désactive tous les boutons
+  // enlève la sélection des autres
   const buttons = answersContainer.querySelectorAll(".answer-btn");
-  buttons.forEach((btn, i) => {
-    btn.classList.add("disabled");
-    if (i === q.correctIndex) {
-      btn.classList.add("correct");
-    }
-  });
+  buttons.forEach((btn) => btn.classList.remove("selected"));
 
-  if (index === q.correctIndex) {
-    score++;
-    scoreText.textContent = score;
-    button.classList.add("correct");
-    feedback.textContent = q.feedbackCorrect || "Bonne réponse !";
-    feedback.classList.add("correct");
-  } else {
-    button.classList.add("incorrect");
-    feedback.textContent = q.feedbackIncorrect || "Ce n’est pas la bonne réponse.";
-    feedback.classList.add("incorrect");
+  // met en avant celle qu'on vient de cliquer
+  button.classList.add("selected");
+
+  feedback.textContent = ""; // on nettoie éventuellement un ancien message "choisis une réponse"
+}
+
+// Bouton "Valider la réponse"
+function validateCurrentAnswer() {
+  if (selectedAnswerIndex === null) {
+    feedback.textContent = "Choisis une réponse avant de valider 🙂";
+    feedback.className = "feedback";
+    return;
   }
 
+  hasValidated = true;
+  userAnswers[currentQuestionIndex] = selectedAnswerIndex;
+
+  // On désactive les boutons de réponse
+  const buttons = answersContainer.querySelectorAll(".answer-btn");
+  buttons.forEach((btn) => {
+    btn.classList.add("disabled");
+  });
+
+  validateBtn.disabled = true;
   nextBtn.disabled = false;
+
+  // Message neutre : on ne dit pas si c'est bon ou pas
+  feedback.textContent = "Réponse enregistrée, tu peux passer à la question suivante.";
+  feedback.className = "feedback";
 }
 
 function updateProgress() {
@@ -373,7 +392,7 @@ function updateProgress() {
 }
 
 function goToNext() {
-  if (!hasAnswered) return;
+  if (!hasValidated) return;
 
   currentQuestionIndex++;
   if (currentQuestionIndex >= questions.length) {
@@ -388,6 +407,15 @@ function showEndScreen() {
   endScreen.classList.remove("hidden");
 
   const total = questions.length;
+
+  // Calcul du score à partir des réponses enregistrées
+  score = 0;
+  for (let i = 0; i < total; i++) {
+    if (userAnswers[i] === questions[i].correctIndex) {
+      score++;
+    }
+  }
+
   const percent = Math.round((score / total) * 100);
 
   if (playerName) {
@@ -411,13 +439,23 @@ function showEndScreen() {
   endCorrect.textContent = `Bonnes réponses : ${score}`;
   endTotal.textContent = `Nombre total de questions : ${total}`;
 
-  // ✅ Envoi des résultats vers Google Sheets
-  sendResultsToSheet({
-    pseudo: playerName || "Anonyme",
-    score: score,
-    totalQuestions: total,
-    pourcentage: percent
-  });
+  // ⚠️ On ne valide officiellement que la PREMIÈRE tentative sur cet appareil
+  const alreadySent = localStorage.getItem("quiz_comm_sent") === "true";
+
+  if (!alreadySent) {
+    // ✅ Envoi des résultats vers Google Sheets (1ère tentative uniquement)
+    sendResultsToSheet({
+      pseudo: playerName || "Anonyme",
+      score: score,
+      totalQuestions: total,
+      pourcentage: percent
+    });
+
+    localStorage.setItem("quiz_comm_sent", "true");
+  }
+
+  // On marque ce navigateur comme "quiz terminé"
+  localStorage.setItem("quiz_comm_finished", "true");
 }
 
 // =============================
@@ -431,7 +469,7 @@ function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
 
   fetch(SHEET_ENDPOINT, {
     method: "POST",
-    mode: "no-cors", // important pour éviter les problèmes CORS
+    mode: "no-cors", // évite les soucis CORS
     headers: {
       "Content-Type": "text/plain;charset=utf-8"
     },
@@ -449,6 +487,13 @@ function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
 startBtn.addEventListener("click", () => {
   const value = pseudoInput.value.trim();
 
+  // 🔒 Empêche de refaire le quiz sur le même appareil
+  const alreadyDone = localStorage.getItem("quiz_comm_finished") === "true";
+  if (alreadyDone) {
+    pseudoError.textContent = "Tu as déjà complété ce quiz sur cet appareil.";
+    return;
+  }
+
   if (!value) {
     pseudoError.textContent = "Merci de saisir un pseudo 🙂";
     pseudoInput.focus();
@@ -461,6 +506,7 @@ startBtn.addEventListener("click", () => {
 });
 
 nextBtn.addEventListener("click", goToNext);
+validateBtn.addEventListener("click", validateCurrentAnswer);
 
 // Quand on rejoue, on garde le même pseudo
 restartBtn.addEventListener("click", startQuiz);
