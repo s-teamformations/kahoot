@@ -330,6 +330,16 @@
       box-shadow: none;
     }
 
+    .answer-btn.selected {
+  border-color: rgba(96, 165, 250, 0.95);
+  background: radial-gradient(
+    circle at top left,
+    rgba(56, 189, 248, 0.35),
+    rgba(15, 23, 42, 0.95)
+  );
+}
+
+
     .feedback {
       min-height: 20px;
       font-size: 0.85rem;
@@ -345,13 +355,15 @@
       color: var(--danger);
     }
 
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-top: 8px;
-    }
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap; /* pour que ça passe bien sur mobile */
+}
+
 
     .score {
       font-size: 0.86rem;
@@ -632,15 +644,22 @@
 
       <div id="feedback" class="feedback"></div>
 
-      <div class="footer">
-        <div class="score">
-          Score : <strong id="score-text">0</strong>
-        </div>
-        <button id="next-btn" class="primary-btn" disabled>
-          <span id="next-btn-text">Question suivante</span>
-          <span class="icon">⟶</span>
-        </button>
-      </div>
+<div class="footer">
+  <div class="score">
+    Score : <strong id="score-text">0</strong>
+  </div>
+
+  <button id="validate-btn" class="primary-btn">
+    <span>Valider la réponse</span>
+    <span class="icon">✔</span>
+  </button>
+
+  <button id="next-btn" class="primary-btn" disabled>
+    <span id="next-btn-text">Question suivante</span>
+    <span class="icon">⟶</span>
+  </button>
+</div>
+
     </div>
 
     <!-- ÉCRAN DE FIN -->
@@ -665,4 +684,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
