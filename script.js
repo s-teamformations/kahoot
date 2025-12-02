@@ -460,6 +460,46 @@ function showEndScreen() {
   endCorrect.textContent = `Bonnes réponses : ${score}`;
   endTotal.textContent = `Nombre total de questions : ${total}`;
 
+  // ✅ Envoi des résultats vers Google Sheets (seulement la 1ʳᵉ fois)
+  const alreadySent = localStorage.getItem("quiz_comm_sent") === "true";
+
+  if (!alreadySent) {
+    sendResultsToSheet({
+      pseudo: playerName || "Anonyme",
+      score: score,
+      totalQuestions: total,
+      pourcentage: percent
+    });
+    localStorage.setItem("quiz_comm_sent", "true");
+  }
+
+  // ✅ On marque ce navigateur comme "quiz terminé"
+  localStorage.setItem("quiz_comm_finished", "true");
+}
+
+  const percent = Math.round((score / total) * 100);
+
+  if (playerName) {
+    endScore.textContent = `${playerName}, tu as obtenu ${score} / ${total} (${percent}%).`;
+  } else {
+    endScore.textContent = `Tu as obtenu ${score} / ${total} (${percent}%).`;
+  }
+
+  let msg = "";
+  if (percent === 100) {
+    msg = "Excellent, tu maîtrises parfaitement le contenu !";
+  } else if (percent >= 70) {
+    msg = "Très bon résultat, tu as bien compris l’essentiel 👍";
+  } else if (percent >= 50) {
+    msg = "C’est un bon début, mais tu peux encore progresser.";
+  } else {
+    msg = "Pas grave, ce quiz est là pour t’aider à repérer ce qu’il faut revoir.";
+  }
+  endMessage.textContent = msg;
+
+  endCorrect.textContent = `Bonnes réponses : ${score}`;
+  endTotal.textContent = `Nombre total de questions : ${total}`;
+
   // ⚠️ On ne valide officiellement que la PREMIÈRE tentative sur cet appareil
   const alreadySent = localStorage.getItem("quiz_comm_sent") === "true";
 
