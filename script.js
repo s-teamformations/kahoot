@@ -47,12 +47,12 @@ const questions = [
   {
     question: "Parmi ces propositions, lequel est un support visuel ?",
     answers: [
-      "Newsletter imprimée",
       "Infographie",
+      "Newsletter imprimée",
       "E-mail de relance",
       "Communiqué de presse"
     ],
-    correctIndex: 1,
+    correctIndex: 0,
     theme: "Supports visuels",
     difficulty: "Niveau facile",
     feedbackCorrect: "Exact : l’infographie est un support visuel qui synthétise des infos.",
@@ -76,11 +76,11 @@ const questions = [
     question: "Quel est le point fort principal d’Instagram pour un BPJEPS APT / MAP ?",
     answers: [
       "La diffusion de longs rapports écrits",
-      "Le partage de visuels et de vidéos de qualité sur les séances",
+      "L’envoi de newsletters PDF",
       "La gestion des inscriptions administratives",
-      "L’envoi de newsletters PDF"
+      "Le partage de visuels et de vidéos de qualité sur les séances"
     ],
-    correctIndex: 1,
+    correctIndex: 3,
     theme: "Réseaux sociaux",
     difficulty: "Niveau moyen",
     feedbackCorrect: "Exact : Instagram est centré sur les visuels, idéal pour montrer séances, ambiance et résultats.",
@@ -103,12 +103,12 @@ const questions = [
   {
     question: "Pourquoi la communication est-elle décrite comme un levier stratégique pour une structure sportive ?",
     answers: [
-      "Parce qu’elle remplace entièrement la qualité des séances",
       "Parce qu’elle permet d’atteindre des objectifs précis (informer, recruter, fidéliser, etc.)",
+      "Parce qu’elle remplace entièrement la qualité des séances",
       "Parce qu’elle garantit automatiquement le succès financier",
       "Parce qu’elle évite d’avoir à former les coachs"
     ],
-    correctIndex: 1,
+    correctIndex: 0,
     theme: "Plan de communication",
     difficulty: "Niveau moyen",
     feedbackCorrect: "Exact : la communication sert à atteindre des objectifs précis (informer, promouvoir, fidéliser…).",
@@ -146,11 +146,11 @@ const questions = [
     question: "Quels types de critères utilise-t-on pour bien décrire une cible de communication ?",
     answers: [
       "Uniquement le prénom et le nom",
-      "Démographiques, géographiques et psychographiques",
+      "Uniquement le code postal",
       "Leur couleur préférée et leur plat favori",
-      "Uniquement le code postal"
+      "Démographiques, géographiques et psychographiques"
     ],
-    correctIndex: 1,
+    correctIndex: 3,
     theme: "Cibles de communication",
     difficulty: "Niveau moyen",
     feedbackCorrect: "Oui : on combine des critères démographiques, géographiques et psychographiques.",
@@ -160,11 +160,11 @@ const questions = [
     question: "Quel est le rôle du message clé dans un plan de communication ?",
     answers: [
       "Servir uniquement de slogan pour les coachs",
-      "Être l’idée principale à faire retenir par la cible",
       "Remplacer la charte graphique",
+      "Être l’idée principale à faire retenir par la cible",
       "Définir le budget de communication"
     ],
-    correctIndex: 1,
+    correctIndex: 2,
     theme: "Message clé / Messaging",
     difficulty: "Niveau moyen",
     feedbackCorrect: "Exact : le message clé est l’idée principale que la cible doit retenir.",
@@ -199,34 +199,6 @@ const questions = [
     feedbackIncorrect: "Le Call-to-Action sert à guider la personne vers une action concrète, pas seulement à informer."
   },
   {
-    question: "Dans le modèle AIDA, quelle est l’étape qui vise à donner envie, à faire « rêver » la cible ?",
-    answers: [
-      "Attention",
-      "Intérêt",
-      "Désir",
-      "Action"
-    ],
-    correctIndex: 2,
-    theme: "Modèle AIDA",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Oui : l’étape « Désir » projette la cible dans les bénéfices concrets.",
-    feedbackIncorrect: "L’étape qui vise à créer l’envie et la projection dans les bénéfices, c’est le « D » de Désir."
-  },
-  {
-    question: "Dans le modèle CAB, à quoi correspondent les « Bénéfices » pour le lecteur ?",
-    answers: [
-      "Aux caractéristiques techniques du service",
-      "Aux avantages pour le club uniquement",
-      "À ce que la personne gagne concrètement en utilisant l’offre",
-      "Au budget investi dans la campagne"
-    ],
-    correctIndex: 2,
-    theme: "Modèle CAB",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Exact : les bénéfices montrent ce que l’offre apporte réellement au client.",
-    feedbackIncorrect: "Les bénéfices, ce n’est pas le descriptif technique, mais ce que la personne y gagne concrètement."
-  },
-  {
     question: "Pourquoi est-il important d’adapter le ton et le registre de langue à la cible ?",
     answers: [
       "Pour utiliser un maximum de mots compliqués",
@@ -258,29 +230,15 @@ const questions = [
     question: "À quoi sert un planning de communication dans un plan global ?",
     answers: [
       "À choisir les couleurs du logo",
-      "À organiser dans le temps les actions, les dates et les responsables",
+      "À éviter de définir un budget",
       "À calculer le salaire des coachs",
-      "À éviter de définir un budget"
+      "À organiser dans le temps les actions, les dates et les responsables"
     ],
-    correctIndex: 1,
+    correctIndex: 3,
     theme: "Planning de communication",
     difficulty: "Niveau moyen",
     feedbackCorrect: "Oui : le planning permet de savoir qui fait quoi, quand et avec quelles ressources.",
     feedbackIncorrect: "Le planning sert à organiser les actions dans le temps, pas à gérer le logo ou les salaires."
-  },
-  {
-    question: "Pourquoi définit-on des indicateurs d’évaluation (KPIs) dans un plan de communication ?",
-    answers: [
-      "Pour savoir combien de flyers ont été jetés",
-      "Pour mesurer si les objectifs SMART sont atteints",
-      "Pour remplir une obligation administrative sans intérêt",
-      "Pour remplacer le budget de communication"
-    ],
-    correctIndex: 1,
-    theme: "Évaluation / KPIs",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Exact : les KPIs servent à mesurer l’atteinte des objectifs SMART.",
-    feedbackIncorrect: "Les indicateurs servent à vérifier si les objectifs de communication sont vraiment atteints, pas seulement à faire de la paperasse."
   },
   {
     question: "Quel canal est le plus adapté pour créer une communauté locale autour d’un club sportif (échanges, événements, infos pratiques) ?",
@@ -297,6 +255,7 @@ const questions = [
     feedbackIncorrect: "Pour animer une communauté locale et échanger facilement, Facebook (page ou groupe) est souvent le plus pertinent."
   }
 ];
+
 
 
 // =============================
