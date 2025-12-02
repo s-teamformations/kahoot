@@ -301,7 +301,7 @@ let userAnswers = []; // on stocke l'index choisi pour chaque question
 infoQuestionCount.textContent = `${questions.length} question(s)`;
 
 function startQuiz() {
-  // marque cet appareil comme ayant déjà démarré le quiz
+  // On marque que le quiz a été démarré sur cet appareil
   localStorage.setItem("quiz_comm_started", "true");
   localStorage.setItem("quiz_comm_finished", "false");
 
@@ -320,6 +320,7 @@ function startQuiz() {
   loadQuestion();
   updateProgress();
 }
+
 
 function loadQuestion() {
   hasValidated = false;
