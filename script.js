@@ -3,242 +3,256 @@
 // =============================
 const questions = [
   {
-    question: "Quelles sont les trois questions à se poser avant de créer un support de communication ?",
+    question: "À quoi sert un support de communication dans une stratégie de communication ?",
     answers: [
-      "Pour qui ? Pourquoi ? Comment ?",
-      "Quand ? Où ? Avec qui ?",
-      "Combien ça rapporte ? Avec quel matériel ?",
-      "Qui ? Quoi ? Où ?"
+      "À diffuser un message auprès d’une cible donnée",
+      "À remplacer le travail de l’équipe de terrain",
+      "À réduire automatiquement le budget de l’organisation",
+      "À éviter d’avoir à définir une cible"
     ],
     correctIndex: 0,
-    theme: "Cible / Message / Support",
+    theme: "Supports de communication",
     difficulty: "Niveau facile",
-    feedbackCorrect: "Oui : Cible (pour qui), Message (pourquoi), Support (comment).",
-    feedbackIncorrect: "On commence toujours par : Pour qui ? Pourquoi ? Comment ?"
+    feedbackCorrect: "Oui : un support sert avant tout à diffuser ton message vers la bonne cible.",
+    feedbackIncorrect: "Un support de communication sert à diffuser un message auprès d’une cible, pas à remplacer l’équipe ou le budget."
   },
   {
-    question: "À quoi correspond la CIBLE dans une communication visuelle ?",
+    question: "Lequel de ces exemples est un support écrit traditionnel ?",
     answers: [
-      "Au format du support utilisé",
-      "Au public visé (âge, niveau sportif, motivations...)",
-      "Au budget de la campagne",
-      "Aux couleurs choisies"
+      "Flyer distribué en main propre",
+      "Story Instagram",
+      "Vidéo TikTok",
+      "Podcast Spotify"
+    ],
+    correctIndex: 0,
+    theme: "Supports écrits",
+    difficulty: "Niveau facile",
+    feedbackCorrect: "Exact : le flyer est un support écrit traditionnel imprimé.",
+    feedbackIncorrect: "Ici, le support écrit traditionnel, c’est le flyer imprimé."
+  },
+  {
+    question: "Quel support est le plus adapté pour présenter de façon détaillée un programme sportif complet ?",
+    answers: [
+      "Une affiche grand format",
+      "Une brochure / dépliant",
+      "Une story Instagram unique",
+      "Un simple QR code sans contexte"
     ],
     correctIndex: 1,
-    theme: "Cible",
-    difficulty: "Niveau facile",
-    feedbackCorrect: "Exact : la cible, c’est le public précis que tu veux toucher.",
-    feedbackIncorrect: "La cible n’est pas le format ou le budget, mais bien le public que tu vises."
-  },
-  {
-    question: "Quel est le rôle du MESSAGE dans le trio Cible / Message / Support ?",
-    answers: [
-      "Choisir la police d’écriture",
-      "Définir l’objectif principal : informer, motiver, vendre, fidéliser…",
-      "Décider du lieu de diffusion",
-      "Créer le logo de la structure"
-    ],
-    correctIndex: 1,
-    theme: "Message",
-    difficulty: "Niveau facile",
-    feedbackCorrect: "Oui, le message sert à clarifier l’objectif principal de ta communication.",
-    feedbackIncorrect: "Le message ne concerne pas la mise en forme, mais l’objectif de ta communication."
-  },
-  {
-    question: "Que désigne le SUPPORT dans la préparation d’un visuel ?",
-    answers: [
-      "Le style de langage utilisé",
-      "Le format choisi : affiche, flyer, post, présentation…",
-      "Le type de public ciblé",
-      "Le budget communication"
-    ],
-    correctIndex: 1,
-    theme: "Support",
-    difficulty: "Niveau facile",
-    feedbackCorrect: "Oui : le support, c’est le format concret de ton message (affiche, post, story…).",
-    feedbackIncorrect: "Le support ne désigne pas le public ni le budget, mais le type de format utilisé."
-  },
-  {
-    question: "Dans la lecture en Z, où se situe le point d’entrée naturel du regard ?",
-    answers: [
-      "En bas à gauche, sur l’appel à l’action",
-      "En bas à droite, sur le logo",
-      "En haut à gauche, souvent pour le logo ou l’identité visuelle",
-      "Au centre exact du visuel"
-    ],
-    correctIndex: 2,
-    theme: "Lecture en Z",
+    theme: "Supports écrits",
     difficulty: "Niveau moyen",
-    feedbackCorrect: "Oui, l’œil commence en haut à gauche, idéal pour votre logo.",
-    feedbackIncorrect: "Le regard démarre en haut à gauche : c’est là qu’on place généralement le logo."
+    feedbackCorrect: "Oui : la brochure ou le dépliant permet de développer davantage d’informations.",
+    feedbackIncorrect: "C’est la brochure/dépliant qui permet de détailler une offre, plus qu’une affiche ou une seule story."
   },
   {
-    question: "Selon le principe de lecture en Z, où placer l’appel à l’action principal ?",
+    question: "Parmi ces propositions, lequel est un support visuel ?",
     answers: [
-      "En haut à gauche",
-      "Au centre du visuel",
-      "En bas à droite",
-      "En haut au centre"
+      "Infographie",
+      "Newsletter imprimée",
+      "E-mail de relance",
+      "Communiqué de presse"
     ],
-    correctIndex: 2,
-    theme: "Lecture en Z",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Exact : la destination du parcours visuel est le bas à droite, parfait pour le call-to-action.",
-    feedbackIncorrect: "L’appel à l’action doit se trouver en bas à droite, destination naturelle de la lecture en Z."
+    correctIndex: 0,
+    theme: "Supports visuels",
+    difficulty: "Niveau facile",
+    feedbackCorrect: "Exact : l’infographie est un support visuel qui synthétise des infos.",
+    feedbackIncorrect: "Le support visuel cité ici est l’infographie, les autres sont avant tout textuels."
   },
   {
-    question: "Laquelle de ces erreurs fait partie de ce qu’il ne faut PAS faire sur un visuel ?",
+    question: "À quoi sert un QR code dans une communication pour un club sportif ?",
     answers: [
-      "Limiter le nombre de couleurs à 2 ou 3",
-      "Utiliser beaucoup de texte et plusieurs typographies différentes",
-      "Créer une hiérarchie visuelle claire",
-      "Laisser de l’espace blanc autour des éléments"
+      "À décorer le flyer sans utilité",
+      "À renvoyer directement vers un site, une vidéo ou un formulaire",
+      "À remplacer le logo de la structure",
+      "À imprimer la plaquette automatiquement"
     ],
     correctIndex: 1,
-    theme: "Erreurs de design",
+    theme: "Supports digitaux",
     difficulty: "Niveau facile",
-    feedbackCorrect: "Oui : surcharge de texte et trop de polices donnent un rendu amateur et illisible.",
-    feedbackIncorrect: "L’erreur est de surcharger en texte et en typographies, pas de simplifier le design."
+    feedbackCorrect: "Oui : le QR code fait le lien entre support papier et contenu digital (site, vidéo, formulaire…).",
+    feedbackIncorrect: "Un QR code sert à renvoyer vers un contenu en ligne, pas seulement à décorer ou remplacer le logo."
   },
   {
-    question: "Pourquoi l’espace blanc (ou vide) est-il important dans un visuel ?",
+    question: "Quel est le point fort principal d’Instagram pour un BPJEPS APT / MAP ?",
     answers: [
-      "Parce qu’il permet d’ajouter plus de logos cachés",
-      "Parce qu’il fait économiser de l’encre à l’impression",
-      "Parce qu’il permet au contenu de respirer et rend le message plus clair",
-      "Parce qu’il remplit les zones vides sans intérêt"
-    ],
-    correctIndex: 2,
-    theme: "Lisibilité",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Exact : l’espace blanc aide l’œil à se reposer et clarifie le message.",
-    feedbackIncorrect: "L’espace blanc n’est pas du vide inutile, il rend la lecture plus fluide et le message plus lisible."
-  },
-  {
-    question: "Selon la règle du 10 / 20 / 30, combien de diapositives maximum une présentation devrait-elle contenir ?",
-    answers: [
-      "5 diapositives maximum",
-      "10 diapositives maximum",
-      "20 diapositives maximum",
-      "30 diapositives maximum"
-    ],
-    correctIndex: 1,
-    theme: "Règle 10 / 20 / 30",
-    difficulty: "Niveau facile",
-    feedbackCorrect: "Oui : la règle conseille 10 slides maximum pour garder l’attention.",
-    feedbackIncorrect: "La règle recommande de se limiter à 10 diapositives pour rester percutant."
-  },
-  {
-    question: "Dans la règle 10 / 20 / 30, que signifie le « 30 » ?",
-    answers: [
-      "30 minutes de présentation maximum",
-      "30 slides maximum par présentation",
-      "30 secondes par slide",
-      "30 points de taille de police minimum pour le texte"
+      "La diffusion de longs rapports écrits",
+      "L’envoi de newsletters PDF",
+      "La gestion des inscriptions administratives",
+      "Le partage de visuels et de vidéos de qualité sur les séances"
     ],
     correctIndex: 3,
-    theme: "Règle 10 / 20 / 30",
+    theme: "Réseaux sociaux",
     difficulty: "Niveau moyen",
-    feedbackCorrect: "Exact, le texte doit rester lisible : minimum 30 points.",
-    feedbackIncorrect: "Le 30 correspond à la taille minimale de police (30 points), pas au temps ou au nombre de slides."
+    feedbackCorrect: "Exact : Instagram est centré sur les visuels, idéal pour montrer séances, ambiance et résultats.",
+    feedbackIncorrect: "Instagram est surtout utile pour partager des photos/vidéos de qualité, pas pour les documents administratifs."
   },
   {
-    question: "Qu’est-ce qu’un « slide-ument » selon le cours ?",
+    question: "Sur quel réseau social va-t-on plutôt adopter un ton professionnel et valoriser son expertise ?",
     answers: [
-      "Une slide très visuelle avec peu de texte",
-      "Une diapositive transformée en document Word projeté avec trop de texte",
-      "Une diapo animée avec beaucoup de transitions",
-      "Une slide destinée uniquement aux réseaux sociaux"
+      "TikTok",
+      "Instagram",
+      "LinkedIn",
+      "Snapchat"
+    ],
+    correctIndex: 2,
+    theme: "Réseaux sociaux",
+    difficulty: "Niveau facile",
+    feedbackCorrect: "Oui : LinkedIn est le réseau orienté professionnel et expertise.",
+    feedbackIncorrect: "C’est sur LinkedIn qu’on adopte un ton plus professionnel pour valoriser compétences et offres."
+  },
+  {
+    question: "Pourquoi la communication est-elle décrite comme un levier stratégique pour une structure sportive ?",
+    answers: [
+      "Parce qu’elle permet d’atteindre des objectifs précis (informer, recruter, fidéliser, etc.)",
+      "Parce qu’elle remplace entièrement la qualité des séances",
+      "Parce qu’elle garantit automatiquement le succès financier",
+      "Parce qu’elle évite d’avoir à former les coachs"
+    ],
+    correctIndex: 0,
+    theme: "Plan de communication",
+    difficulty: "Niveau moyen",
+    feedbackCorrect: "Exact : la communication sert à atteindre des objectifs précis (informer, promouvoir, fidéliser…).",
+    feedbackIncorrect: "On parle de levier stratégique car la communication aide à atteindre des objectifs concrets, pas à tout remplacer."
+  },
+  {
+    question: "Dans la méthode SMART, que signifie la lettre « M » ?",
+    answers: [
+      "Motivant",
+      "Mesurable",
+      "Marketing",
+      "Mensuel"
     ],
     correctIndex: 1,
-    theme: "Mauvaises pratiques de présentation",
+    theme: "Objectifs SMART",
+    difficulty: "Niveau facile",
+    feedbackCorrect: "Oui : un objectif SMART doit être mesurable pour vérifier s’il est atteint.",
+    feedbackIncorrect: "Le « M » correspond à Mesurable : on doit pouvoir quantifier l’objectif."
+  },
+  {
+    question: "Quel énoncé correspond le mieux à un objectif SMART ?",
+    answers: [
+      "Améliorer la visibilité du club.",
+      "Attirer plus de jeunes aux entraînements.",
+      "Augmenter de 20 % le nombre d’adhérents 16–25 ans d’ici 6 mois.",
+      "Communiquer davantage sur les réseaux sociaux."
+    ],
+    correctIndex: 2,
+    theme: "Objectifs SMART",
     difficulty: "Niveau moyen",
-    feedbackCorrect: "Oui, c’est une slide utilisée comme un document Word bourré de texte.",
-    feedbackIncorrect: "Le slide-ument est une diapo surchargée de texte, utilisée comme un document à lire, pas comme un support visuel."
+    feedbackCorrect: "Exact : il est spécifique, mesurable, atteignable, réaliste et limité dans le temps.",
+    feedbackIncorrect: "L’objectif SMART est celui qui précise un chiffre, une cible et une échéance : ici, +20 % d’adhérents 16–25 ans en 6 mois."
   },
   {
-    question: "Dans l’atelier pratique sur Canva, par quel support est-il conseillé de commencer ?",
+    question: "Quels types de critères utilise-t-on pour bien décrire une cible de communication ?",
     answers: [
-      "Par la story Instagram",
-      "Par le post Instagram",
-      "Par l’affiche A4 puis adapter aux autres formats",
-      "Par une vidéo TikTok"
+      "Uniquement le prénom et le nom",
+      "Uniquement le code postal",
+      "Leur couleur préférée et leur plat favori",
+      "Démographiques, géographiques et psychographiques"
+    ],
+    correctIndex: 3,
+    theme: "Cibles de communication",
+    difficulty: "Niveau moyen",
+    feedbackCorrect: "Oui : on combine des critères démographiques, géographiques et psychographiques.",
+    feedbackIncorrect: "On caractérise une cible avec des critères démographiques, géographiques et psychographiques, pas seulement un détail isolé."
+  },
+  {
+    question: "Quel est le rôle du message clé dans un plan de communication ?",
+    answers: [
+      "Servir uniquement de slogan pour les coachs",
+      "Remplacer la charte graphique",
+      "Être l’idée principale à faire retenir par la cible",
+      "Définir le budget de communication"
     ],
     correctIndex: 2,
-    theme: "Canva – Atelier",
-    difficulty: "Niveau facile",
-    feedbackCorrect: "Exact : on commence par l’affiche A4, puis on adapte aux supports digitaux.",
-    feedbackIncorrect: "La méthode recommandée est de commencer par l’affiche A4, puis d’adapter en post et story."
+    theme: "Message clé / Messaging",
+    difficulty: "Niveau moyen",
+    feedbackCorrect: "Exact : le message clé est l’idée principale que la cible doit retenir.",
+    feedbackIncorrect: "Le message clé sert à concentrer l’idée principale à transmettre, ce n’est ni le budget ni la charte graphique."
   },
   {
-    question: "Quel est le format recommandé pour un post Instagram créé dans Canva selon le cours ?",
+    question: "Quels sont les trois piliers d’un message écrit efficace présentés dans la formation ?",
     answers: [
-      "1080 x 1920 px (vertical)",
-      "1920 x 1080 px (horizontal)",
-      "1080 x 1080 px (carré)",
-      "800 x 600 px (paysage classique)"
-    ],
-    correctIndex: 2,
-    theme: "Canva – Réseaux sociaux",
-    difficulty: "Niveau facile",
-    feedbackCorrect: "Oui, un post Instagram classique est au format carré 1080 x 1080 px.",
-    feedbackIncorrect: "Pour un post classique, on utilise un format carré : 1080 x 1080 px."
-  },
-  {
-    question: "Pour une story Instagram réalisée sur Canva, pourquoi faut-il respecter une « zone de sécurité » en haut et en bas de l’écran ?",
-    answers: [
-      "Pour laisser de la place aux sous-titres automatiques",
-      "Pour que le texte et les éléments importants ne soient pas cachés par l’interface d’Instagram",
-      "Pour pouvoir ajouter plus de logos",
-      "Pour respecter les règles de publicité payante"
+      "Introduction, Développement, Conclusion",
+      "Accroche, Corps du message, Call-to-action",
+      "Titre, Photo, Logo",
+      "Budget, Planning, Évaluation"
     ],
     correctIndex: 1,
-    theme: "Canva – Story Instagram",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Exact : l’interface Instagram masque le haut et le bas, il faut donc éviter ces zones.",
-    feedbackIncorrect: "On respecte la zone de sécurité pour que le texte et les éléments importants restent visibles malgré l’interface Instagram."
-  },
-  {
-    question: "Quel usage avancé de Canva Pro est cité dans le cours ?",
-    answers: [
-      "Créer uniquement des tableaux Excel intégrés",
-      "Programmer des macros pour automatiser PowerPoint",
-      "Personnaliser des templates dynamiques et intégrer des éléments graphiques complexes",
-      "Remplacer automatiquement toutes les polices d’un document Word"
-    ],
-    correctIndex: 2,
-    theme: "Canva Pro – Niveau avancé",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Oui, Canva Pro permet de travailler avec des modèles dynamiques et un graphisme plus avancé.",
-    feedbackIncorrect: "Canva Pro est surtout utilisé pour personnaliser des templates dynamiques et enrichir le graphisme, pas pour gérer Excel ou Word."
-  },
-  {
-    question: "Quelle est la bonne chronologie du storytelling proposée dans le cours ?",
-    answers: [
-      "Problème → Situation → Solution → Résultat",
-      "Situation → Problème → Solution → Résultat",
-      "Solution → Résultat → Situation → Problème",
-      "Résultat → Problème → Solution → Situation"
-    ],
-    correctIndex: 1,
-    theme: "Storytelling",
-    difficulty: "Niveau moyen",
-    feedbackCorrect: "Exact : on part de la situation, on présente le problème, puis la solution et enfin le résultat.",
-    feedbackIncorrect: "La structure est : Situation, puis Problème, ensuite Solution, et enfin Résultat."
-  },
-  {
-    question: "À quoi sert une charte graphique pour un coach sportif ou un centre de formation ?",
-    answers: [
-      "À définir uniquement le prix des prestations",
-      "À lister les exercices physiques du programme",
-      "À garantir une identité visuelle cohérente sur tous les supports",
-      "À choisir le matériel sportif à acheter"
-    ],
-    correctIndex: 2,
-    theme: "Identité visuelle",
+    theme: "Communication écrite",
     difficulty: "Niveau facile",
-    feedbackCorrect: "Oui, la charte graphique sert à garder une identité visuelle cohérente et professionnelle.",
-    feedbackIncorrect: "La charte graphique concerne ta communication visuelle, pas les prix ni le matériel."
+    feedbackCorrect: "Oui : Accroche, Corps du message et Call-to-action structurent un message efficace.",
+    feedbackIncorrect: "On parle bien de : Accroche, Corps du message, puis Call-to-action."
+  },
+  {
+    question: "À quoi sert le Call-to-Action (CTA) dans un mail ou un flyer ?",
+    answers: [
+      "À remercier les partenaires",
+      "À expliquer en détail l’historique du club",
+      "À dire clairement ce que la personne doit faire après avoir lu",
+      "À ajouter des informations juridiques"
+    ],
+    correctIndex: 2,
+    theme: "Call-to-Action",
+    difficulty: "Niveau facile",
+    feedbackCorrect: "Exact : le CTA indique l’action attendue (s’inscrire, appeler, visiter le site…).",
+    feedbackIncorrect: "Le Call-to-Action sert à guider la personne vers une action concrète, pas seulement à informer."
+  },
+  {
+    question: "Pourquoi est-il important d’adapter le ton et le registre de langue à la cible ?",
+    answers: [
+      "Pour utiliser un maximum de mots compliqués",
+      "Pour montrer qu’on connaît beaucoup de jargon",
+      "Pour que le message soit compris, crédible et adapté au public visé",
+      "Pour ne pas avoir à structurer le message"
+    ],
+    correctIndex: 2,
+    theme: "Ton & registre",
+    difficulty: "Niveau moyen",
+    feedbackCorrect: "Oui : un ton adapté rend le message plus clair, crédible et efficace pour la cible.",
+    feedbackIncorrect: "On adapte ton et registre pour que la cible comprenne et se sente concernée, pas pour faire du jargon."
+  },
+  {
+    question: "Quel élément NE fait PAS partie des ingrédients essentiels d’un flyer efficace ?",
+    answers: [
+      "Un titre accrocheur",
+      "Un visuel pertinent",
+      "Des informations claires et hiérarchisées",
+      "Un texte très long et dense, sans espaces"
+    ],
+    correctIndex: 3,
+    theme: "Flyer",
+    difficulty: "Niveau facile",
+    feedbackCorrect: "Exact : un texte trop long et sans respiration rend le flyer illisible.",
+    feedbackIncorrect: "Le problème vient du texte très long et dense : un bon flyer doit rester clair, aéré et rapidement lisible."
+  },
+  {
+    question: "À quoi sert un planning de communication dans un plan global ?",
+    answers: [
+      "À choisir les couleurs du logo",
+      "À éviter de définir un budget",
+      "À calculer le salaire des coachs",
+      "À organiser dans le temps les actions, les dates et les responsables"
+    ],
+    correctIndex: 3,
+    theme: "Planning de communication",
+    difficulty: "Niveau moyen",
+    feedbackCorrect: "Oui : le planning permet de savoir qui fait quoi, quand et avec quelles ressources.",
+    feedbackIncorrect: "Le planning sert à organiser les actions dans le temps, pas à gérer le logo ou les salaires."
+  },
+  {
+    question: "Quel canal est le plus adapté pour créer une communauté locale autour d’un club sportif (échanges, événements, infos pratiques) ?",
+    answers: [
+      "Presse nationale",
+      "Radio nationale",
+      "Facebook (page ou groupe)",
+      "Affichage sur autoroute uniquement"
+    ],
+    correctIndex: 2,
+    theme: "Canaux de communication",
+    difficulty: "Niveau facile",
+    feedbackCorrect: "Oui : Facebook est très adapté pour animer une communauté locale autour d’un club.",
+    feedbackIncorrect: "Pour animer une communauté locale et échanger facilement, Facebook (page ou groupe) est souvent le plus pertinent."
   }
 ];
 
@@ -279,16 +293,15 @@ let currentQuestionIndex = 0;
 let score = 0;
 let hasValidated = false;
 let selectedAnswerIndex = null;
-let userAnswers = []; // on stocke l'index choisi pour chaque question
+let userAnswers = []; // index choisi pour chaque question
 
-// Pré-affiche le nombre de questions sur l’écran de départ
+// Affiche le nombre de questions sur l’écran de départ
 infoQuestionCount.textContent = `${questions.length} question(s)`;
 
+// =============================
+// DÉMARRAGE DU QUIZ
+// =============================
 function startQuiz() {
-  // marque cet appareil comme ayant déjà démarré le quiz
-  localStorage.setItem("quiz_comm_started", "true");
-  localStorage.setItem("quiz_comm_finished", "false");
-
   currentQuestionIndex = 0;
   score = 0;
   hasValidated = false;
@@ -305,6 +318,9 @@ function startQuiz() {
   updateProgress();
 }
 
+// =============================
+// CHARGEMENT DES QUESTIONS
+// =============================
 function loadQuestion() {
   hasValidated = false;
   selectedAnswerIndex = null;
@@ -347,6 +363,9 @@ function loadQuestion() {
   updateProgress();
 }
 
+// =============================
+// SÉLECTION / VALIDATION
+// =============================
 function selectAnswer(button, index) {
   if (hasValidated) return; // une fois validé, on ne change plus
 
@@ -359,7 +378,7 @@ function selectAnswer(button, index) {
   // met en avant celle qu'on vient de cliquer
   button.classList.add("selected");
 
-  feedback.textContent = ""; // on nettoie éventuellement un ancien message "choisis une réponse"
+  feedback.textContent = "";
 }
 
 // Bouton "Valider la réponse"
@@ -387,6 +406,9 @@ function validateCurrentAnswer() {
   feedback.className = "feedback";
 }
 
+// =============================
+// PROGRESSION
+// =============================
 function updateProgress() {
   const current = currentQuestionIndex + 1;
   const total = questions.length;
@@ -406,6 +428,9 @@ function goToNext() {
   }
 }
 
+// =============================
+// FIN DU QUIZ
+// =============================
 function showEndScreen() {
   quizScreen.classList.add("hidden");
   endScreen.classList.remove("hidden");
@@ -443,29 +468,26 @@ function showEndScreen() {
   endCorrect.textContent = `Bonnes réponses : ${score}`;
   endTotal.textContent = `Nombre total de questions : ${total}`;
 
-  // ⚠️ On ne valide officiellement que la PREMIÈRE tentative sur cet appareil
+  // ✅ Envoi des résultats vers Google Sheets (seulement la 1ʳᵉ fois sur cet appareil)
   const alreadySent = localStorage.getItem("quiz_comm_sent") === "true";
 
   if (!alreadySent) {
-    // ✅ Envoi des résultats vers Google Sheets (1ère tentative uniquement)
     sendResultsToSheet({
       pseudo: playerName || "Anonyme",
       score: score,
       totalQuestions: total,
       pourcentage: percent
     });
-
     localStorage.setItem("quiz_comm_sent", "true");
   }
 
-  // On marque ce navigateur comme "quiz terminé"
-  localStorage.setItem("quiz_comm_finished", "true");
+  // On peut verrouiller cet appareil si tu veux bloquer d'autres tentatives
+  localStorage.setItem("quiz_comm_locked", "true");
 }
 
 // =============================
 // ENVOI DES RÉSULTATS VERS GOOGLE SHEETS
 // =============================
-
 const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeOF-ZcFFERkyAuNQ-L3YbJqfmcXMOakiD6HXkIaqKiemDFAOeBsIMuhl4E44O9laJ/exec";
 
 function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
@@ -487,41 +509,47 @@ function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
 // ÉVÉNEMENTS
 // =============================
 
-// On vérifie le pseudo avant de lancer le quiz
+// Bouton "Commencer le quiz"
 startBtn.addEventListener("click", () => {
   const value = pseudoInput.value.trim();
 
-  const started  = localStorage.getItem("quiz_comm_started") === "true";
-  const finished = localStorage.getItem("quiz_comm_finished") === "true";
+  // 🔐 1) Code formateur pour réinitialiser cet appareil
+  // (insensible à la casse : resetquiz, RESETQUIZ, ResetQuiz...)
+  if (value.toUpperCase() === "RESETQUIZ") {
+    localStorage.removeItem("quiz_comm_sent");
+    localStorage.removeItem("quiz_comm_locked");
 
-  // a déjà commencé mais pas fini → il essaie de recommencer de zéro
-  if (started && !finished) {
-    pseudoError.textContent = "Tu as déjà commencé ce quiz sur cet appareil. Va voir le formateur 🙂";
+    pseudoError.textContent = "Appareil réinitialisé ✅ Saisis maintenant le pseudo de l'élève.";
+    pseudoInput.value = "";
     return;
   }
 
-  // a déjà fini → il essaie de le refaire pour améliorer son score
-  if (finished) {
-    pseudoError.textContent = "Tu as déjà complété ce quiz sur cet appareil.";
+  // 2) Anti-triche simple : on bloque après la première tentative officielle
+  const locked = localStorage.getItem("quiz_comm_locked") === "true";
+  if (locked) {
+    pseudoError.textContent = "Tu as déjà complété ce quiz sur cet appareil. Va voir le formateur 🙂";
     return;
   }
 
+  // 3) Vérification du pseudo normal
   if (!value) {
     pseudoError.textContent = "Merci de saisir un pseudo 🙂";
     pseudoInput.focus();
     return;
   }
 
+  // 4) Tout est ok → on démarre
   playerName = value;
   pseudoError.textContent = "";
   startQuiz();
 });
 
-
+// Bouton "Question suivante"
 nextBtn.addEventListener("click", goToNext);
+
+// Bouton "Valider la réponse"
 validateBtn.addEventListener("click", validateCurrentAnswer);
 
-// Quand on rejoue, on garde le même pseudo
+// Bouton "Rejouer le quiz" (après la fin)
+// → sert pour s'entraîner, mais n'enverra plus de résultats vers Sheets
 restartBtn.addEventListener("click", startQuiz);
-
-
