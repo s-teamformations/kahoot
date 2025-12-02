@@ -256,8 +256,6 @@ const questions = [
   }
 ];
 
-
-
 // =============================
 // 2. LOGIQUE DU QUIZ
 // =============================
@@ -295,16 +293,15 @@ let currentQuestionIndex = 0;
 let score = 0;
 let hasValidated = false;
 let selectedAnswerIndex = null;
-let userAnswers = []; // on stocke l'index choisi pour chaque question
+let userAnswers = []; // index choisi pour chaque question
 
-// Pré-affiche le nombre de questions sur l’écran de départ
+// Affiche le nombre de questions sur l’écran de départ
 infoQuestionCount.textContent = `${questions.length} question(s)`;
 
+// =============================
+// DÉMARRAGE DU QUIZ
+// =============================
 function startQuiz() {
-  // On marque que le quiz a été démarré sur cet appareil
-  localStorage.setItem("quiz_comm_started", "true");
-  localStorage.setItem("quiz_comm_finished", "false");
-
   currentQuestionIndex = 0;
   score = 0;
   hasValidated = false;
@@ -321,7 +318,9 @@ function startQuiz() {
   updateProgress();
 }
 
-
+// =============================
+// CHARGEMENT DES QUESTIONS
+// =============================
 function loadQuestion() {
   hasValidated = false;
   selectedAnswerIndex = null;
@@ -364,6 +363,9 @@ function loadQuestion() {
   updateProgress();
 }
 
+// =============================
+// SÉLECTION / VALIDATION
+// =============================
 function selectAnswer(button, index) {
   if (hasValidated) return; // une fois validé, on ne change plus
 
@@ -376,7 +378,7 @@ function selectAnswer(button, index) {
   // met en avant celle qu'on vient de cliquer
   button.classList.add("selected");
 
-  feedback.textContent = ""; // on nettoie éventuellement un ancien message "choisis une réponse"
+  feedback.textContent = "";
 }
 
 // Bouton "Valider la réponse"
@@ -404,6 +406,9 @@ function validateCurrentAnswer() {
   feedback.className = "feedback";
 }
 
+// =============================
+// PROGRESSION
+// =============================
 function updateProgress() {
   const current = currentQuestionIndex + 1;
   const total = questions.length;
@@ -423,6 +428,9 @@ function goToNext() {
   }
 }
 
+// =============================
+// FIN DU QUIZ
+// =============================
 function showEndScreen() {
   quizScreen.classList.add("hidden");
   endScreen.classList.remove("hidden");
@@ -460,7 +468,7 @@ function showEndScreen() {
   endCorrect.textContent = `Bonnes réponses : ${score}`;
   endTotal.textContent = `Nombre total de questions : ${total}`;
 
-  // ✅ Envoi des résultats vers Google Sheets (seulement la 1ʳᵉ fois)
+  // ✅ Envoi des résultats vers Google Sheets (seulement la 1ʳᵉ fois sur cet appareil)
   const alreadySent = localStorage.getItem("quiz_comm_sent") === "true";
 
   if (!alreadySent) {
@@ -473,56 +481,13 @@ function showEndScreen() {
     localStorage.setItem("quiz_comm_sent", "true");
   }
 
-  // ✅ On marque ce navigateur comme "quiz terminé"
-  localStorage.setItem("quiz_comm_finished", "true");
-}
-
-  const percent = Math.round((score / total) * 100);
-
-  if (playerName) {
-    endScore.textContent = `${playerName}, tu as obtenu ${score} / ${total} (${percent}%).`;
-  } else {
-    endScore.textContent = `Tu as obtenu ${score} / ${total} (${percent}%).`;
-  }
-
-  let msg = "";
-  if (percent === 100) {
-    msg = "Excellent, tu maîtrises parfaitement le contenu !";
-  } else if (percent >= 70) {
-    msg = "Très bon résultat, tu as bien compris l’essentiel 👍";
-  } else if (percent >= 50) {
-    msg = "C’est un bon début, mais tu peux encore progresser.";
-  } else {
-    msg = "Pas grave, ce quiz est là pour t’aider à repérer ce qu’il faut revoir.";
-  }
-  endMessage.textContent = msg;
-
-  endCorrect.textContent = `Bonnes réponses : ${score}`;
-  endTotal.textContent = `Nombre total de questions : ${total}`;
-
-  // ⚠️ On ne valide officiellement que la PREMIÈRE tentative sur cet appareil
-  const alreadySent = localStorage.getItem("quiz_comm_sent") === "true";
-
-  if (!alreadySent) {
-    // ✅ Envoi des résultats vers Google Sheets (1ère tentative uniquement)
-    sendResultsToSheet({
-      pseudo: playerName || "Anonyme",
-      score: score,
-      totalQuestions: total,
-      pourcentage: percent
-    });
-
-    localStorage.setItem("quiz_comm_sent", "true");
-  }
-
-  // On marque ce navigateur comme "quiz terminé"
-  localStorage.setItem("quiz_comm_finished", "true");
+  // On peut verrouiller cet appareil si tu veux bloquer d'autres tentatives
+  localStorage.setItem("quiz_comm_locked", "true");
 }
 
 // =============================
 // ENVOI DES RÉSULTATS VERS GOOGLE SHEETS
 // =============================
-
 const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeOF-ZcFFERkyAuNQ-L3YbJqfmcXMOakiD6HXkIaqKiemDFAOeBsIMuhl4E44O9laJ/exec";
 
 function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
@@ -544,35 +509,25 @@ function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
 // ÉVÉNEMENTS
 // =============================
 
-// On vérifie le pseudo avant de lancer le quiz
+// Bouton "Commencer le quiz"
 startBtn.addEventListener("click", () => {
   const value = pseudoInput.value.trim();
 
   // 🔐 1) Code formateur pour réinitialiser cet appareil
   // (insensible à la casse : resetquiz, RESETQUIZ, ResetQuiz...)
   if (value.toUpperCase() === "RESETQUIZ") {
-    localStorage.removeItem("quiz_comm_started");
-    localStorage.removeItem("quiz_comm_finished");
     localStorage.removeItem("quiz_comm_sent");
+    localStorage.removeItem("quiz_comm_locked");
 
     pseudoError.textContent = "Appareil réinitialisé ✅ Saisis maintenant le pseudo de l'élève.";
     pseudoInput.value = "";
     return;
   }
 
-  // 2) Vérification anti-triche
-  const started  = localStorage.getItem("quiz_comm_started") === "true";
-  const finished = localStorage.getItem("quiz_comm_finished") === "true";
-
-  // a déjà commencé mais pas fini → il essaie de recommencer de zéro
-  if (started && !finished) {
-    pseudoError.textContent = "Tu as déjà commencé ce quiz sur cet appareil. Va voir le formateur 🙂";
-    return;
-  }
-
-  // a déjà fini → il essaie de le refaire pour améliorer son score
-  if (finished) {
-    pseudoError.textContent = "Tu as déjà complété ce quiz sur cet appareil.";
+  // 2) Anti-triche simple : on bloque après la première tentative officielle
+  const locked = localStorage.getItem("quiz_comm_locked") === "true";
+  if (locked) {
+    pseudoError.textContent = "Tu as déjà complété ce quiz sur cet appareil. Va voir le formateur 🙂";
     return;
   }
 
@@ -589,10 +544,13 @@ startBtn.addEventListener("click", () => {
   startQuiz();
 });
 
-
-
+// Bouton "Question suivante"
 nextBtn.addEventListener("click", goToNext);
+
+// Bouton "Valider la réponse"
 validateBtn.addEventListener("click", validateCurrentAnswer);
 
-// Quand on rejoue, on garde le même pseudo
+// Bouton "Rejouer le quiz" (après la fin)
+// → sert pour s'entraîner, mais n'enverra plus de résultats vers Sheets
 restartBtn.addEventListener("click", startQuiz);
+
