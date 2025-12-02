@@ -548,6 +548,19 @@ function sendResultsToSheet({ pseudo, score, totalQuestions, pourcentage }) {
 startBtn.addEventListener("click", () => {
   const value = pseudoInput.value.trim();
 
+  // 🔐 1) Code formateur pour réinitialiser cet appareil
+  // (insensible à la casse : resetquiz, RESETQUIZ, ResetQuiz...)
+  if (value.toUpperCase() === "RESETQUIZ") {
+    localStorage.removeItem("quiz_comm_started");
+    localStorage.removeItem("quiz_comm_finished");
+    localStorage.removeItem("quiz_comm_sent");
+
+    pseudoError.textContent = "Appareil réinitialisé ✅ Saisis maintenant le pseudo de l'élève.";
+    pseudoInput.value = "";
+    return;
+  }
+
+  // 2) Vérification anti-triche
   const started  = localStorage.getItem("quiz_comm_started") === "true";
   const finished = localStorage.getItem("quiz_comm_finished") === "true";
 
@@ -563,16 +576,19 @@ startBtn.addEventListener("click", () => {
     return;
   }
 
+  // 3) Vérification du pseudo normal
   if (!value) {
     pseudoError.textContent = "Merci de saisir un pseudo 🙂";
     pseudoInput.focus();
     return;
   }
 
+  // 4) Tout est ok → on démarre
   playerName = value;
   pseudoError.textContent = "";
   startQuiz();
 });
+
 
 
 nextBtn.addEventListener("click", goToNext);
